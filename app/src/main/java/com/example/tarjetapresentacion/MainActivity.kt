@@ -50,14 +50,19 @@ fun MainContent() {
         LogoSection(
             logoId = R.drawable.android_logo,
             name ="Miguel O. Martínez Rach",
-            cargo = "Desarrollador Jetpack Compose Android"
+            cargo = "Desarrollador Jetpack Compose Android",
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(0.5f)
         )
         // Adding a Spacer of height 20dp
         //Spacer(modifier = Modifier.height(100.dp))
         InfoSection(
             phone = "+34 666 66 66 66",
             social = "@mmrach",
-            email = "mmrach@mail.com")
+            email = "mmrach@mail.com",
+            modifier = Modifier.padding(bottom = 20.dp).fillMaxHeight()
+        )
     }
 }
 
@@ -67,15 +72,13 @@ fun LogoSection(
     name: String = "Name",
     logoId: Int? = null,
     cargo:String = "Developer",
+    modifier: Modifier,
 ){
     val logo: Painter =  painterResource(id = logoId ?: R.drawable.image_placeholder )
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(0.5f)
-
+        modifier = modifier
     ){
         Image(
             painter = logo,
@@ -102,10 +105,11 @@ fun LogoSection(
 fun InfoSection(
     email:String="",
     phone:String="",
-    social:String=""
+    social:String="",
+    modifier: Modifier
 ){
     Column(
-        modifier = Modifier.fillMaxSize().padding(bottom = 20.dp),
+        modifier = modifier, // = Modifier.fillMaxSize().padding(bottom = 20.dp),
         verticalArrangement = Arrangement.Bottom
     ){
         Divider(color = MaterialTheme.colorScheme.onPrimary, thickness = 1.dp)
@@ -133,7 +137,7 @@ fun InfoSection(
         }
 
         Divider(color = MaterialTheme.colorScheme.onPrimary, thickness = 1.dp)
-            Row(Modifier
+        Row(Modifier
             .padding(start = 50.dp, top=10.dp, bottom = 10.dp)
         ){
             Icon(Icons.Rounded.Email,contentDescription = null, tint = MaterialTheme.colorScheme.onPrimary)
